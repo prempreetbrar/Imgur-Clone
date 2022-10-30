@@ -1,13 +1,14 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
-# Create your models here.
 class Tag(models.Model):
     title = models.CharField(max_length=20)
 
 
 class Image(models.Model):
-    owner = models.ForeignKey("auth.User", related_name="image", on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name="image", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     image = models.ImageField()
     description = models.TextField(blank=True)
