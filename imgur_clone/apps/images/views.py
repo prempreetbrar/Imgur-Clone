@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .models import Image
-from .serializers import ImageSerializer
+from .serializers import ImageSerializer, UserSerializer
+from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions
 
 
@@ -18,3 +19,7 @@ class ImageViewSet(viewsets.ModelViewSet):
     # uploaded the image
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
