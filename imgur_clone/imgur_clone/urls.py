@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from apps.images.urls import images_urlpatterns
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 ]
+urlpatterns += images_urlpatterns
