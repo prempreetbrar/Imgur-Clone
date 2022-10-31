@@ -5,12 +5,13 @@ from rest_framework.response import Response
 
 from .models import Image
 from .serializers import ImageSerializer, UserSerializer
+from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions
 
 
 class ImageViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
